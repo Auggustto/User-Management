@@ -18,6 +18,8 @@ class UserModels:
                 )
             db.add(user)
             db.commit()
+            
+            return {"message": "User added successfully"}
         
         
     def read_user(self, user_email):

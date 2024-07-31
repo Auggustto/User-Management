@@ -1,8 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 from app.controllers.user_controller import UserController
+from app.schemas.user_schemas import MetadaUser
 
-routers = APIRouter(prefix='/task-schedule/api/', tags=['Users'])
+user_routers = APIRouter(prefix='/task-schedule/api', tags=['Users'])
 
-@routers.get('/user', tags=['Create users'])
+@user_routers.post('/user', status_code=status.HTTP_201_CREATED, tags=['Users'])
 def check(metadata: MetadaUser):
-    return UserController.create_user(metadata)
+    return UserController().create_user(metadata)
