@@ -9,12 +9,12 @@ def create(metadata: MetadaUser):
     return UserController().create_user(metadata)
 
 @user_routers.get('/user/{email}', status_code=status.HTTP_200_OK, tags=['Users'])
-def read(email):
+def read(email: str):
     return UserController().read_user(email)
 
-@user_routers.put('/user', status_code=status.HTTP_201_CREATED, tags=['Users'])
-def update(metadata: MetadaUser):
-    return UserController().create_user(metadata)
+@user_routers.put('/user/{email}', status_code=status.HTTP_200_OK, tags=['Users'])
+def update(email: str, metadata: MetadaUser):
+    return UserController().update_user(email, metadata)
 
 # @user_routers.delete('/user', status_code=status.HTTP_201_CREATED, tags=['Users'])
 # def delete(metadata: MetadaUser):

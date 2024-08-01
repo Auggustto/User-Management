@@ -11,9 +11,9 @@ class UserController(UserModels):
         if validation_format_email(email):
             return super().read_user(email)
         
-    
-    # def update_user(self, metadata):
-    #     return super().create_user(metadata)
+    def update_user(self, email: str, metadata):
+        if validation_format_email(email):
+            return super().update_user(email, metadata)
     
     # def delete_user(self, metadata):
     #     return super().create_user(metadata)

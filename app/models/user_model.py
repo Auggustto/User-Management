@@ -36,8 +36,21 @@ class UserModels:
             return check.as_dict()
 
     
-    def update_user(self, user_id, new_password):
-        pass
+    def update_user(self, email, metadata):
+        with get_db_session() as db:
+            check = self.check_user(email)
+            if check is None:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
+            user = User(
+                name=metadata.name,
+                email=metadata.email,
+                password=metadata.password,
+                account_status=True
+                )
+            db.add(user)
+            db.commit()
+            return {"message": "User update successfully"}
+            
     
     def delete_user(self, user_id):
         pass
