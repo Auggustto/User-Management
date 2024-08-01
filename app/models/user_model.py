@@ -1,3 +1,4 @@
+from fastapi import status, HTTPException
 from app.models.database.models import User
 from app.models.database.session_db import get_db_session
 
@@ -5,11 +6,17 @@ from app.models.database.session_db import get_db_session
 class UserModels:
     
     def check_user(self, email):
-        pass
+        with get_db_session() as db:
+            return db.query(User).filter(User.email == email).first()
+    
     
     def create_user(self, metadata):
         with get_db_session() as db:
             
+            check = self.check_user(metadata.email)
+            
+            if check is not None:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail: {metadata.email} already in use")
             user = User(
                 name=metadata.name,
                 email=metadata.email,
@@ -18,12 +25,16 @@ class UserModels:
                 )
             db.add(user)
             db.commit()
-            
             return {"message": "User added successfully"}
+
         
-        
-    def read_user(self, user_email):
-        pass
+    def read_user(self, email: str):
+        with get_db_session() as db:
+            check = self.check_user(email)
+            if check is None:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
+            return check.as_dict()
+
     
     def update_user(self, user_id, new_password):
         pass
