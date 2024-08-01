@@ -5,12 +5,12 @@ from app.models.database.session_db import get_db_session
 
 class UserModels:
     
-    def check_user(self, email):
+    def check_user(self, email: str):
         with get_db_session() as db:
             return db.query(User).filter(User.email == email).first()
     
     
-    def create_user(self, metadata):
+    def create_user(self, metadata: dict):
         with get_db_session() as db:
             
             check = self.check_user(metadata.email)
@@ -36,7 +36,7 @@ class UserModels:
             return check.as_dict()
 
     
-    def update_user(self, email, metadata):
+    def update_user(self, email: str, metadata: dict):
         with get_db_session() as db:
             
             check_email = self.check_user(email)
@@ -45,20 +45,28 @@ class UserModels:
             if check_email is None:
                 raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
             
-            if check_new_email is not None:
+            elif check_new_email is not None:
                 raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail: {metadata.email} already in use")
             
-            user = User(
-                name=metadata.name,
-                email=metadata.email,
-                password=metadata.password,
-                account_status=True
-                )
-            db.commit()
-            return {"message": "User update successfully"}
+            else:
+                check_email.name=metadata.name,
+                check_email.email=metadata.email,
+                check_email.password=metadata.password,
+                db.add(check_email)
+                db.commit()
+                return {"message": "User update successfully"}
             
     
-    def delete_user(self, user_id):
-        pass
+    def delete_user(self, email: str):
+        with get_db_session() as db:
+            
+            check = self.check_user(email)
+            if check is None:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
+            
+            check.account_status=False
+            db.add(check)
+            db.commit()
+            return {"message": "User deletede successfully"}
 
 

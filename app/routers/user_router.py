@@ -16,6 +16,6 @@ def read(email: str):
 def update(email: str, metadata: MetadaUser):
     return UserController().update_user(email, metadata)
 
-# @user_routers.delete('/user', status_code=status.HTTP_201_CREATED, tags=['Users'])
-# def delete(metadata: MetadaUser):
-#     return UserController().create_user(metadata)
+@user_routers.delete('/user/{email}', status_code=status.HTTP_201_CREATED, tags=['Users'])
+def delete(email: str):
+    return UserController().delete_user(email)
