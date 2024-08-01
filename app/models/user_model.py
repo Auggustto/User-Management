@@ -38,16 +38,22 @@ class UserModels:
     
     def update_user(self, email, metadata):
         with get_db_session() as db:
-            check = self.check_user(email)
-            if check is None:
+            
+            check_email = self.check_user(email)
+            check_new_email = self.check_user(metadata.email)
+            
+            if check_email is None:
                 raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
+            
+            if check_new_email is not None:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail: {metadata.email} already in use")
+            
             user = User(
                 name=metadata.name,
                 email=metadata.email,
                 password=metadata.password,
                 account_status=True
                 )
-            db.add(user)
             db.commit()
             return {"message": "User update successfully"}
             
