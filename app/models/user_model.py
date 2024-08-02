@@ -1,6 +1,7 @@
 from fastapi import status, HTTPException
 from app.models.database.models import User
 from app.models.database.session_db import get_db_session
+from app.services.password_services import hash_password
 
 
 class UserModels:
@@ -20,7 +21,7 @@ class UserModels:
             user = User(
                 name=metadata.name,
                 email=metadata.email,
-                password=metadata.password,
+                password=hash_password(metadata.password),
                 account_status=True
                 )
             db.add(user)
