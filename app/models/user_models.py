@@ -1,4 +1,5 @@
 from fastapi import status, HTTPException
+from sqlalchemy.orm import joinedload
 from app.models.database.models import User
 from app.models.database.session_db import get_db_session
 from app.services.password_services import hash_password
@@ -8,7 +9,7 @@ class UserModels:
     
     def check_user(self, email: str):
         with get_db_session() as db:
-            return db.query(User).filter(User.email == email).first()
+            return db.query(User).options(joinedload(User.tasks)).filter_by(email=email).first()
     
     
     def create_user(self, metadata: dict):

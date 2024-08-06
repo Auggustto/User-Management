@@ -1,6 +1,9 @@
 from sqlalchemy import Integer, String, Column, DateTime, Boolean, LargeBinary, ForeignKey, func
 from sqlalchemy.orm import relationship
+from datetime import datetime
 from app.models.database.base import Base
+from app.services.get_current_date_and_time_br_services import format_datetime
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -18,7 +21,8 @@ class User(Base):
             "id": self.id,
             "name": self.name,
             "email": self.email,
-            "account_status": self.account_status
+            "account_status": self.account_status,
+            "tasks": [task.as_dict() for task in self.tasks]
         }
         
 

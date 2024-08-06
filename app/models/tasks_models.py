@@ -1,9 +1,9 @@
 from fastapi import status, HTTPException
-from datetime import datetime
 
 from app.models.database.session_db import get_db_session
 from app.models.database.models import Tasks
 from app.models.user_models import UserModels
+from app.services.get_current_date_and_time_br_services import get_current_time
 
 
 
@@ -30,8 +30,8 @@ class TasksModels(UserModels):
                 description=metadata.description,
                 user_id=check.id,
                 status=metadata.status,
-                created_at=datetime.now(),
-                due_date=datetime.now()
+                created_at=get_current_time(),
+                due_date=get_current_time()
                 )
             db.add(task)
             db.commit()
@@ -58,7 +58,7 @@ class TasksModels(UserModels):
             check.title = metadata.title
             check.description = metadata.description
             check.status = metadata.status
-            check.updated_at = datetime.now()
+            check.updated_at = get_current_time()
             db.add(check)
             db.commit()
             return {"message": "Task updated successfully"}
