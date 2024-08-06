@@ -36,6 +36,7 @@ def validation_token(token: str = Depends(oauth2_scheme)):
         user_name: str = payload.get("sub")
         if user_name is None:
             raise credentials_exception
+        
     except ExpiredSignatureError:
         raise HTTPException(
             status_code=HTTPStatus.UNAUTHORIZED,
