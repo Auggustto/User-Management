@@ -3,7 +3,7 @@ from datetime import timedelta
 from datetime import timedelta
 
 from fastapi import HTTPException, status
-from app.models.user_model import UserModels
+from app.models.user_models import UserModels
 from app.services.password_services import validation_password
 from app.services.create_token_services import create_access_token
 

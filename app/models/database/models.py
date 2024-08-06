@@ -33,7 +33,7 @@ class Tasks(Base):
     status = Column(String, unique=False)
     created_at = Column(DateTime, nullable=False)
     due_date = Column(DateTime, nullable=False)
-    updated_at = Column(DateTime, nullable=False)
+    updated_at = Column(DateTime, nullable=True)
     
     user = relationship("User", back_populates="tasks")
     
