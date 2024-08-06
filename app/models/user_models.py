@@ -30,11 +30,10 @@ class UserModels:
 
         
     def read_user(self, email: str):
-        with get_db_session() as db:
-            check = self.check_user(email)
-            if check is None:
-                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
-            return check.as_dict()
+        check = self.check_user(email)
+        if check is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
+        return check.as_dict()
 
     
     def update_user(self, email: str, metadata: dict):

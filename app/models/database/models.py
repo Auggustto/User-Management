@@ -29,7 +29,7 @@ class Tasks(Base):
     tags = Column(String(15), unique=False)
     title = Column(String(50), unique=False)
     description = Column(String, unique=False)
-    user_id = Column(Integer, unique=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     status = Column(String, unique=False)
     created_at = Column(DateTime, nullable=False)
     due_date = Column(DateTime, nullable=False)
