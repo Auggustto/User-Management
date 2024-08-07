@@ -1,4 +1,4 @@
-from app.models.user_model import UserModels
+from app.models.user_models import UserModels
 from app.services.validator_email_services import validation_format_email
 
 
