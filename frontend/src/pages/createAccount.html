@@ -8,28 +8,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- Import css -->
-    <link rel="stylesheet" href="./src/assets/styles/login.css">
+    <link rel="stylesheet" href="../assets/styles/createAccount.css">
 
     <title>Criar Conta</title>
 </head>
 
 <body class="text-center d-flex justify-content-center align-items-center" style="height: 100vh;">
-    <div class="container">
+    <div class="container col-md-10">
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <form class="form-signin">
-                    <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                <form id="createAccount" class="form-signin">
+                    <!-- <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
                     <h1 class="h3 mb-3 font-weight-normal">Criar Conta</h1>
-                    <label for="inputName" class="sr-only">Nome Completo</label>
-                    <input type="text" id="inputName" class="form-control mb-2" placeholder="Nome Completo" required="" autofocus="">
-                    <label for="inputEmail" class="sr-only">Endereço de email</label>
-                    <input type="email" id="inputEmail" class="form-control mb-2" placeholder="Seu email" required="">
-                    <label for="inputPassword" class="sr-only">Senha</label>
-                    <input type="password" id="inputPassword" class="form-control mb-2" placeholder="Senha" required="">
+                    <label for="name" class="sr-only">Nome Completo</label>
+                    <input type="text" id="name" class="form-control mb-2" placeholder="Nome Completo" required="" autofocus="">
+                    <label for="email" class="sr-only">Endereço de email</label>
+                    <div id="errorEmail"></div>
+                    <input type="email" id="email" class="form-control mb-2" placeholder="Seu email" required="">
+                    <label for="password" class="sr-only">Senha</label>
+                    <input type="password" id="password" class="form-control mb-2" placeholder="Senha" required="">
                     <label for="confirmPassword" class="sr-only">Confirmar Senha</label>
                     <input type="password" id="confirmPassword" class="form-control mb-3" placeholder="Confirmar Senha" required="">
+                    <div id="errorCreateAccount"></div>
+
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Criar Conta</button>
-                    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
                 </form>
             </div>
         </div>
@@ -44,6 +46,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <script src="../services/createAccount.js"></script>
 </body>
 
 </html>

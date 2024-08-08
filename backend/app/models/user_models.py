@@ -18,7 +18,8 @@ class UserModels:
             check = self.check_user(metadata.email)
             
             if check is not None:
-                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail: {metadata.email} already in use")
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail already in use")
+            
             user = User(
                 name=metadata.name,
                 email=metadata.email,

@@ -17,6 +17,8 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             body: JSON.stringify({ email, password })
         });
 
+        console.log(response)
+
         if (response.ok) {
             const data = await response.json();
 
@@ -30,7 +32,15 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             // window.location.href = '/pagina-protegida.html';
         } else {
             // Lidar com erro de login
-            alert('Falha no login. Verifique suas credenciais.');
+            // alert('Falha no login. Verifique suas credenciais.');
+            const errorLogin = document.getElementById('errorLogin');
+            errorLogin.innerHTML = '';
+
+            errorLogin.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    E-mail ou Senha incorretos.
+                </div>
+            `;
         }
     } catch (error) {
         console.error('Erro ao fazer login:', error);
