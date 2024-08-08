@@ -12,8 +12,8 @@ app = FastAPI()
 
 # Lista de origens permitidas
 origins = [
-    "http://localhost:3000",  # Por exemplo, se o frontend estiver rodando nessa porta
-    "http://localhost:8000",  # Se você estiver consumindo a API de uma outra aplicação rodando em localhost
+    "http://localhost:3000",
+    "http://localhost:8000",
 ]
 
 # Configuração do CORS
@@ -21,8 +21,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],  # Permitir todos os métodos (GET, POST, etc)
-    allow_headers=["*"],  # Permitir todos os cabeçalhos
+    allow_methods=["*"],
+    allow_headers=["*"],
+    max_age=3600
 )
 
 ### include all routers ###
