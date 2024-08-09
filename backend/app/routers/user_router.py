@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, Depends
-from app.controllers.user_controller import UserController
-from app.schemas.user_schemas import MetadaUser
-from app.services.create_token_services import validation_token
+from backend.app.controllers.user_controller import UserController
+from backend.app.schemas.user_schemas import MetadaUser
+from backend.app.services.create_token_services import validation_token
 
 user_routers = APIRouter(prefix='/task-schedule/api', tags=['Users'])
 

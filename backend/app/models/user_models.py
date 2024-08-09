@@ -1,8 +1,8 @@
 from fastapi import status, HTTPException
 from sqlalchemy.orm import joinedload
-from app.models.database.models import User
-from app.models.database.session_db import get_db_session
-from app.services.password_services import hash_password
+from backend.app.models.database.models import User
+from backend.app.models.database.session_db import get_db_session
+from backend.app.services.password_services import hash_password
 
 
 class UserModels:
@@ -18,7 +18,7 @@ class UserModels:
             check = self.check_user(metadata.email)
             
             if check is not None:
-                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail already in use")
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail backend.already in use")
             
             user = User(
                 name=metadata.name,

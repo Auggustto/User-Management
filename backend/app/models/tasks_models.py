@@ -1,9 +1,9 @@
 from fastapi import status, HTTPException
 
-from app.models.database.session_db import get_db_session
-from app.models.database.models import Tasks
-from app.models.user_models import UserModels
-from app.services.get_current_date_and_time_br_services import get_current_time
+from backend.app.models.database.session_db import get_db_session
+from backend.app.models.database.models import Tasks
+from backend.app.models.user_models import UserModels
+from backend.app.services.get_current_date_and_time_br_services import get_current_time
 
 
 

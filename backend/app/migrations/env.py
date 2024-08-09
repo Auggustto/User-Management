@@ -9,7 +9,7 @@ from alembic import context
 ## Config for using .env ###
 from dotenv import load_dotenv
 import os
-from app.models.database.models import Base
+from backend.app.models.database.models import Base
 
 
 ### Exporting the environment variables ###

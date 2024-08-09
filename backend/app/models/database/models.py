@@ -1,8 +1,8 @@
 from sqlalchemy import Integer, String, Column, DateTime, Boolean, LargeBinary, ForeignKey, func
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from app.models.database.base import Base
-from app.services.get_current_date_and_time_br_services import format_datetime
+from backend.app.models.database.base import Base
+from backend.app.services.get_current_date_and_time_br_services import format_datetime
 
 
 class User(Base):
