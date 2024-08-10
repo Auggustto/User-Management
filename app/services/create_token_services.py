@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException
 from http import HTTPStatus
 from fastapi.security import OAuth2PasswordBearer
-from jwt import DecodeError, decode, encode, ExpiredSignatureError
+# from jwt import DecodeError, decode, encode, ExpiredSignatureError
 
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
@@ -32,18 +32,18 @@ def validation_token(token: str = Depends(oauth2_scheme)):
         headers={'WWW-Authenticate': 'Bearer'},
     )
     try:
-        payload = decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         user_name: str = payload.get("sub")
         if user_name is None:
             raise credentials_exception
         
-    except ExpiredSignatureError:
+    except jwt.ExpiredSignatureError:
         raise HTTPException(
             status_code=HTTPStatus.UNAUTHORIZED,
             detail="Token has expired",
             headers={'WWW-Authenticate': 'Bearer'},
         )
-    except DecodeError:
+    except jwt.DecodeError:
         raise credentials_exception
     return user_name
 
