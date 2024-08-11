@@ -9,21 +9,21 @@ from app.services.get_current_date_and_time_br_services import get_current_time
 
 class TasksModels(UserModels):
     
-    def check_user(self, email: str):
-        return super().check_user(email)
+    def check_user_id(self, id: int):
+        return super().check_user_id(id)
     
     def check_task(self, id: int):
         with get_db_session() as db:
             return db.query(Tasks).filter(Tasks.id == id).first()
     
     
-    def create_task(self, email: str, metadata: dict):
+    def create_task(self, id: int, metadata: dict):
         with get_db_session() as db:
             
-            check = self.check_user(email)
+            check = self.check_user_id(id)
             
             if check is None:
-                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail: {metadata.email} not found.")
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Id: {id} not found.")
             task = Tasks(
                 tags=metadata.tags,
                 title=metadata.title,

@@ -5,9 +5,9 @@ from app.services.create_token_services import validation_token
 
 tasks_routers = APIRouter(prefix='/task-schedule/api', tags=['Tasks'])
 
-@tasks_routers.post('/task/{email}', status_code=status.HTTP_201_CREATED, tags=['Tasks'])
-def create(email: str, metadata: MetadaTasks):
-    return TaskController().create_task(email, metadata)
+@tasks_routers.post('/task/{id}', status_code=status.HTTP_201_CREATED, tags=['Tasks'])
+def create(id: int, metadata: MetadaTasks):
+    return TaskController().create_task(id, metadata)
 
 @tasks_routers.get('/task/{id}', status_code=status.HTTP_200_OK, tags=['Tasks'])
 def read(id: int):
