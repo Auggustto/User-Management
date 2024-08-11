@@ -26,12 +26,9 @@ document.getElementById('createAccount').addEventListener('submit', async functi
 
             console.log(data)
 
-            // // Salvar os dados de login e JWT em cache
-            // localStorage.setItem('user', JSON.stringify(data.user)); 
-            // localStorage.setItem('jwt', data.token);
-
-            // // Redirecionar ou realizar outra ação após o login
+            //Redirecionar ou realizar outra ação após o login
             window.location.href = '../../index.html';
+            
         } else {
 
             if (response == "E-mail already in use"){

@@ -25,15 +25,12 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             console.log(data)
 
             // Salvar os dados de login e JWT em cache
-            localStorage.setItem('user', JSON.stringify(data.user)); 
+            localStorage.setItem('email', JSON.stringify(data.email)); 
             localStorage.setItem('jwt', data.token);
 
-            // window.location.href = '../pages/home.html';
             window.location.href = 'src/pages/home.html';
 
         } else {
-            // Lidar com erro de login
-            // alert('Falha no login. Verifique suas credenciais.');
             const errorLogin = document.getElementById('errorLogin');
             errorLogin.innerHTML = '';
 
@@ -45,6 +42,14 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         }
     } catch (error) {
         console.error('Erro ao fazer login:', error);
+        const errorLogin = document.getElementById('errorLogin');
+            errorLogin.innerHTML = '';
+
+            errorLogin.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    Erro interno.
+                </div>
+            `;
     }
 });
 
