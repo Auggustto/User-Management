@@ -7,15 +7,19 @@ from app.services.password_services import hash_password
 
 class UserModels:
     
-    def check_user(self, email: str):
+    def check_user_email(self, email: str):
         with get_db_session() as db:
             return db.query(User).options(joinedload(User.tasks)).filter_by(email=email).first()
+        
+    def check_user_id(self, id: int):
+        with get_db_session() as db:
+            return db.query(User).options(joinedload(User.tasks)).filter_by(id=id).first()
     
     
     def create_user(self, metadata: dict):
         with get_db_session() as db:
             
-            check = self.check_user(metadata.email)
+            check = self.check_user_email(metadata.email)
             
             if check is not None:
                 raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail: {metadata.email} already in use")
@@ -30,21 +34,21 @@ class UserModels:
             return {"message": "User added successfully"}
 
         
-    def read_user(self, email: str):
-        check = self.check_user(email)
+    def read_user(self, id: int):
+        check = self.check_user_id(id)
         if check is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id: {id} not found")
         return check.as_dict()
 
     
-    def update_user(self, email: str, metadata: dict):
+    def update_user(self, id: int, metadata: dict):
         with get_db_session() as db:
             
-            check_email = self.check_user(email)
-            check_new_email = self.check_user(metadata.email)
+            check_email = self.check_user_id(id)
+            check_new_email = self.check_user_email(metadata.email)
             
             if check_email is None:
-                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id: {id} not found")
             
             elif check_new_email is not None:
                 raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"E-mail: {metadata.email} already in use")
@@ -52,22 +56,22 @@ class UserModels:
             else:
                 check_email.name=metadata.name,
                 check_email.email=metadata.email,
-                check_email.password=metadata.password,
+                check_email.password=hash_password(metadata.password),
                 db.add(check_email)
                 db.commit()
                 return {"message": "User update successfully"}
             
     
-    def delete_user(self, email: str):
+    def delete_user(self, id: int):
         with get_db_session() as db:
             
-            check = self.check_user(email)
+            check = self.check_user_id(id)
             if check is None:
-                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id: {id} not found")
             
             check.account_status=False
             db.add(check)
             db.commit()
-            return {"message": "User deletede successfully"}
+            return {"message": "User successfully deactivated."}
 
 

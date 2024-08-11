@@ -7,14 +7,14 @@ class UserController(UserModels):
     def create_user(self, metadata):
         return super().create_user(metadata)
     
-    def read_user(self, email: str):
-        if validation_format_email(email):
-            return super().read_user(email)
+    def read_user(self, id: int):
+        # if validation_format_email(id):
+        return super().read_user(id)
         
-    def update_user(self, email: str, metadata):
-        if validation_format_email(email):
-            return super().update_user(email, metadata)
+    def update_user(self, id: int, metadata):
+        # if validation_format_email(id):
+        return super().update_user(id, metadata)
     
-    def delete_user(self, email: str):
-        if validation_format_email(email):
-            return super().delete_user(email)
+    def delete_user(self, id: int):
+        # if validation_format_email(email):
+        return super().delete_user(id)

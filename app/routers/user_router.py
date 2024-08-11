@@ -9,14 +9,14 @@ user_routers = APIRouter(prefix='/task-schedule/api', tags=['Users'])
 def create(metadata: MetadaUser):
     return UserController().create_user(metadata)
 
-@user_routers.get('/user/{email}', status_code=status.HTTP_200_OK, tags=['Users'])
-def read(email: str, current_user: str = Depends(validation_token)):
-    return UserController().read_user(email)
+@user_routers.get('/user/{id}', status_code=status.HTTP_200_OK, tags=['Users'])
+def read(id: int, current_user: str = Depends(validation_token)):
+    return UserController().read_user(id)
 
-@user_routers.put('/user/{email}', status_code=status.HTTP_200_OK, tags=['Users'])
-def update(email: str, metadata: MetadaUser, current_user: str = Depends(validation_token)):
-    return UserController().update_user(email, metadata)
+@user_routers.put('/user/{id}', status_code=status.HTTP_200_OK, tags=['Users'])
+def update(id: int, metadata: MetadaUser, current_user: str = Depends(validation_token)):
+    return UserController().update_user(id, metadata)
 
-@user_routers.delete('/user/{email}', status_code=status.HTTP_201_CREATED, tags=['Users'])
-def delete(email: str, current_user: str = Depends(validation_token)):
-    return UserController().delete_user(email)
+@user_routers.delete('/user/{id}', status_code=status.HTTP_201_CREATED, tags=['Users'])
+def delete(id: int, current_user: str = Depends(validation_token)):
+    return UserController().delete_user(id)

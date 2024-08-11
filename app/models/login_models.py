@@ -14,7 +14,7 @@ class UserLoginModels(UserModels):
     # @catch_exceptions
     def user_login(self, metadata):
         
-        user = super().check_user(metadata.email)
+        user = super().check_user_email(metadata.email)
         ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
         if user:
@@ -27,6 +27,6 @@ class UserLoginModels(UserModels):
                 access_token = create_access_token(
                     data={"sub": user.name}, expires_delta=access_token_expires
                 )
-                return {"email": metadata.email, "token": access_token}
+                return {"id": user.id, "token": access_token}
             
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Email or password is incorrect")
