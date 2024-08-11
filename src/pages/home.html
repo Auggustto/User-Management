@@ -1,65 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <!-- Meta tags Obrigatórias -->
-        <meta charset="utf-8">
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-            crossorigin="anonymous">
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Agenda de tarefas</title>
-    </head>
-    <body>
-        
-        <div class="container">
-            <div id="navbar"></div>
-            <div id="Taskstable" class="table"></div>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/src/assets/styles/sidebar.css">
+    <link rel="stylesheet" href="/src/assets/styles/card.css">
 
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                    <th scope="col" class="text-center">#</th>
-                    <th scope="col">Primeiro</th>
-                    <th scope="col" class="text-center">Último</th>
-                    <th scope="col" class="text-center">Nickname</th>
-                    <th scope="col" class="text-center">Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row" class="text-center">1</th>
-                    <td>Mark</td>
-                    <td class="text-center">Otto</td>
-                    <td class="text-center">@mdo</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-outline-info btn-sm">Visualizar</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm">Excluir</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+    <title>Agenda de tarefas</title>
+</head>
 
-        <!-- JavaScript (Opcional) -->
-        <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-        <script
-            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
-        
-        <!-- navbar -->
-        <script src="/src/components/header.js"></script>
-        <script src="/src/services/taskList.js"></script>
-    </body>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- sidebar -->
+            <nav id="sidebar" class="col-md-2 d-none d-md-block bg-dark sidebar">
+                <!-- Conteúdo da sidebar -->
+            </nav>
+            <!-- <div class="row">
+            <div class="col-sm-2">
+                <div id="sidebar" class="sidebar"></div>
+            </div> -->
+
+            <!-- <div class="col-sm-10"> -->
+            <main class="col-md-10 ml-sm-auto px-4">
+
+                <!-- cards -->
+                <div class="row">
+                    <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-blue order-card">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Orders Received</h6>
+                                <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
+                                <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-green order-card">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Orders Received</h6>
+                                <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
+                                <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-yellow order-card">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Orders Received</h6>
+                                <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>486</span></h2>
+                                <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-pink order-card">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Orders Received</h6>
+                                <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>486</span></h2>
+                                <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- linha -->
+                <hr class="line">
+
+                <!-- table asks -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="title">
+                            <h4 class="display-5 text-left">Minhas Tarefas</h4>
+                        </div>
+                        <div id="tasks" class="container"></div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <!-- navbar -->
+    <script src="/src/components/header.js"></script>
+    <script src="/src/services/taskList.js"></script>
+</body>
+
 </html>

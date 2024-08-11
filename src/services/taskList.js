@@ -1,81 +1,85 @@
-// Fetch data from API
-const BASE_URL = 'http://srv579221.hstgr.cloud:8000/task-schedule/api/task/';
+document.addEventListener("DOMContentLoaded", function () {
+    const profileElement = document.getElementById('name');
+    const tasksElement = document.getElementById('tasks');
 
-// Recuperando JWT e email do localStorage
-const token = localStorage.getItem('jwt');
-const email = localStorage.getItem('email');
+    const token = localStorage.getItem('jwt');
+    const id = localStorage.getItem('id');
 
-if (token && email) {
+    if (token && id) {
+        fetch('http://srv579221.hstgr.cloud:8000/task-schedule/api/user/' + id, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("metadados", data);
 
-    fetch('http://srv579221.hstgr.cloud:8000/task-schedule/api/task/'+email, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-    }})
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-    })
-    .catch(error => {
-        console.error('Erro ao buscar tarefas:', error);
-    });
-} 
-else {
-    console.error('Token ou email não encontrados no cache');
-}
+                document.getElementById('name').innerHTML = `
+                    ${data.name}
+                `;
 
+                // Verifica se existem tarefas e cria a tabela
+                if (data.tasks && data.tasks.length > 0) {
+                    let tableHTML = `
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">id</th>
+                                <th scope="col" class="text-center">Tag</th>
+                                <th scope="col" class="text-center">Titulo</th>
+                                <th scope="col" class="text-center">Criado</th>
+                                <th scope="col" class="text-center">Status</th>
+                                <th scope="col" class="text-center">opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
 
+                    // Adiciona uma linha para cada tarefa
+                    data.tasks.forEach((task, index) => {
+                        tableHTML += `
+                        <tr>
+                            <td class="text-center">${index + 1}</td>
+                            <td class="text-center">${task.tags}</td>
+                            <td class="text-center">${task.title}</td>
+                            <td>${task.description}</td>
+                            <td class="text-center">${task.status}</td>
+                            <td class="text-center">
+                                <button type="button"
+                                    class="btn btn-outline-info btn-sm">Visualizar</button>
+                                <button type="button"
+                                    class="btn btn-outline-danger btn-sm">Excluir</button>
+                            </td>
+                        </tr>
+                    `;
+                    });
 
+                    tableHTML += `
+                        </tbody>
+                    </table>
+                `;
 
+                    tasksElement.innerHTML = tableHTML;
+                } else {
+                    tasksElement.innerHTML = `
+                    <div class="alert alert-warning" role="alert">
+                        Poxa.. Nenhuma tarefa cadastrada <a href="#" class="alert-link">clique aqui para cadastrar</a>.
+                    </div>
+                `;
+                }
+                //  verificar token 
+                if (data.detail === "Token has expired") {
+                    window.location.href = 'login.html';
+                }
 
-// document.getElementById('loginForm').addEventListener('submit', async function (event) {
-//     event.preventDefault();
-
-//     const email = document.getElementById('inputEmail').value;
-//     const password = document.getElementById('inputPassword').value;
-
-//     try {
-//         const response = await fetch(BASE_URL, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({ email, password })
-//         });
-
-//         console.log(response)
-
-//         if (response.ok) {
-//             const data = await response.json();
-
-//             console.log(data)
-
-//             // Salvar os dados de login e JWT em cache
-//             localStorage.setItem('email', JSON.stringify(data.email)); 
-//             localStorage.setItem('jwt', data.token);
-
-//             window.location.href = 'src/pages/home.html';
-
-//         } else {
-//             const errorLogin = document.getElementById('errorLogin');
-//             errorLogin.innerHTML = '';
-
-//             errorLogin.innerHTML = `
-//                 <div class="alert alert-danger" role="alert">
-//                     E-mail ou Senha incorretos.
-//                 </div>
-//             `;
-//         }
-//     } catch (error) {
-//         console.error('Erro ao fazer login:', error);
-//         const errorLogin = document.getElementById('errorLogin');
-//             errorLogin.innerHTML = '';
-
-//             errorLogin.innerHTML = `
-//                 <div class="alert alert-danger" role="alert">
-//                     Erro interno.
-//                 </div>
-//             `;
-//     }
-// });
+            })
+            .catch(error => {
+                console.error('Erro ao buscar tarefas:', error);
+            });
+    } else {
+        console.error('Token ou email não encontrados no cache');
+    }
+});

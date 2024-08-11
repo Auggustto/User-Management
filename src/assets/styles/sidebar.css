@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    background-color: #000; /* Fundo preto */
+    color: #fff; /* Texto branco */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .profile {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar .profile img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.sidebar .profile h5 {
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+.sidebar .profile p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.sidebar .nav {
+    flex: 1; /* Faz com que a navegação ocupe o espaço restante */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .nav-link {
+    color: #fff; /* Cor dos links */
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px; /* Espaço entre ícone e texto */
+}
+
+.sidebar .nav-link.active {
+    background-color: #343a40; /* Cor de fundo para o item ativo */
+}
+
+.sidebar .logout {
+    margin-top: auto; /* Empurra o logout para o fundo */
+    /* display: flex; */
+}
+
+main {
+    margin-left: 250px; /* Espaço suficiente para a sidebar */
+    padding: 15px;
+}

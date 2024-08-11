@@ -25,7 +25,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             console.log(data)
 
             // Salvar os dados de login e JWT em cache
-            localStorage.setItem('email', JSON.stringify(data.email)); 
+            localStorage.setItem('id', JSON.stringify(data.id)); 
             localStorage.setItem('jwt', data.token);
 
             window.location.href = 'src/pages/home.html';
