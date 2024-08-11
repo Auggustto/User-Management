@@ -1,6 +1,6 @@
 
 // Fetch data from API
-const BASE_URL = 'http://localhost:8000/task-schedule/api/user';
+const BASE_URL = 'http://srv579221.hstgr.cloud:8000/task-schedule/api/user';
 
 document.getElementById('createAccount').addEventListener('submit', async function (event) {
     event.preventDefault();

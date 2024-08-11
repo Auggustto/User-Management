@@ -1,44 +1,13 @@
 version: "3.1"
 
 services:
-  app:
-    build:
-      context: ./backend
-    # container_name: backend
-    ports:
-      - 8000:8000
-    volumes:
-      # - ./backend/app:/app
-      - /home/leonardo/Documentos/praticando/User-Management/backend:/app
-    networks:
-      - app-network
-    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-    depends_on:
-      - postgresql
-    env_file:
-      - backend/.env
-  
-  postgresql:
-    image: postgres
-    ports: 
-      - 5432:5432
-    env_file:
-      - backend/.env
-    volumes:
-      - /home/work/Documentos/Projetos/database/User-Management
-    networks:
-      - app-network
-
   frontend:
-    build: ./frontend
-    container_name: frontend
+    build: .
     ports:
       - "3000:80"
-    depends_on:
-      - app
     networks:
-      - app-network
+      - frontend-network
 
 networks:
-  app-network:
+  frontend-network:
     driver: bridge
