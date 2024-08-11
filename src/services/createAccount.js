@@ -31,7 +31,7 @@ document.getElementById('createAccount').addEventListener('submit', async functi
             // localStorage.setItem('jwt', data.token);
 
             // // Redirecionar ou realizar outra ação após o login
-            window.location.href = './login.html';
+            window.location.href = '../../index.html';
         } else {
 
             if (response == "E-mail already in use"){

@@ -24,12 +24,13 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
             console.log(data)
 
-            // // Salvar os dados de login e JWT em cache
-            // localStorage.setItem('user', JSON.stringify(data.user)); 
-            // localStorage.setItem('jwt', data.token);
+            // Salvar os dados de login e JWT em cache
+            localStorage.setItem('user', JSON.stringify(data.user)); 
+            localStorage.setItem('jwt', data.token);
 
-            // // Redirecionar ou realizar outra ação após o login
-            // window.location.href = '/pagina-protegida.html';
+            // window.location.href = '../pages/home.html';
+            window.location.href = 'src/pages/home.html';
+
         } else {
             // Lidar com erro de login
             // alert('Falha no login. Verifique suas credenciais.');
