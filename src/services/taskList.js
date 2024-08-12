@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <td class="text-center">${index + 1}</td>
                             <td class="text-center">${task.tags}</td>
                             <td class="text-center">${task.title}</td>
-                            <td>${task.description}</td>
+                            <td class="text-center">${task.created_at}</td>
                             <td class="text-center">${task.status}</td>
                             <td class="text-center">
                                 <button type="button"

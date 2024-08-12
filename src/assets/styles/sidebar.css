@@ -67,3 +67,7 @@ main {
     margin-left: 250px; /* Espaço suficiente para a sidebar */
     padding: 15px;
 }
+
+.line-sidebar {
+    background-color: #fff;
+}
