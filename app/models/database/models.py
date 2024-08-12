@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.models.database.base import Base
 from app.services.get_current_date_and_time_br_services import format_datetime
+from collections import Counter
 
 
 class User(Base):
@@ -17,12 +18,16 @@ class User(Base):
     tasks = relationship("Tasks", back_populates="user")
     
     def as_dict(self):
+
+        status_count = Counter(task.status for task in self.tasks)
+                
         return {
             "id": self.id,
             "name": self.name,
             "email": self.email,
             "account_status": self.account_status,
-            "tasks": [task.as_dict() for task in self.tasks]
+            "tasks": [task.as_dict() for task in self.tasks],
+            "status_count": dict(status_count)
         }
         
 
