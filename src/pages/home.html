@@ -14,6 +14,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/src/assets/styles/sidebar.css">
     <link rel="stylesheet" href="/src/assets/styles/card.css">
+    <link rel="stylesheet" href="/src/assets/styles/table.css">
 
     <title>Agenda de tarefas</title>
 </head>
@@ -27,47 +28,7 @@
             <main class="col-md-10 ml-sm-auto px-4">
 
                 <!-- cards -->
-                <div class="row">
-                    <div class="col-md-4 col-xl-3">
-                        <div class="card bg-c-blue order-card">
-                            <div class="card-block">
-                                <h6 class="m-b-20">Orders Received</h6>
-                                <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
-                                <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-xl-3">
-                        <div class="card bg-c-green order-card">
-                            <div class="card-block">
-                                <h6 class="m-b-20">Orders Received</h6>
-                                <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
-                                <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-xl-3">
-                        <div class="card bg-c-yellow order-card">
-                            <div class="card-block">
-                                <h6 class="m-b-20">Orders Received</h6>
-                                <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>486</span></h2>
-                                <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-xl-3">
-                        <div class="card bg-c-pink order-card">
-                            <div class="card-block">
-                                <h6 class="m-b-20">Orders Received</h6>
-                                <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>486</span></h2>
-                                <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div id="card" class="row justify-content-center"></div>
 
                 <!-- linha -->
                 <hr class="line">
@@ -76,15 +37,14 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="title">
-                            <h4 class="display-5 text-left">Minhas Tarefas</h4>
+                            <h4 class="display-5 text-center">Minhas
+                                Tarefas</h4>
                         </div>
                         <div id="tasks" class="container"></div>
                     </div>
                 </div>
         </div>
     </div>
-
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -99,6 +59,8 @@
     <!-- navbar -->
     <script src="/src/components/header.js"></script>
     <script src="/src/services/taskList.js"></script>
+    <script src="/src/services/cards.js"></script>
+
 </body>
 
 </html>

@@ -5,8 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem('jwt');
     const id = localStorage.getItem('id');
 
+    // server
+    // http://srv579221.hstgr.cloud:8000/task-schedule/api/user/
+
     if (token && id) {
-        fetch('http://srv579221.hstgr.cloud:8000/task-schedule/api/user/' + id, {
+        fetch('http://localhost:8000/task-schedule/api/user/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     ${data.name}
                 `;
 
-                // Verifica se existem tarefas e cria a tabela
                 if (data.tasks && data.tasks.length > 0) {
                     let tableHTML = `
                     <table class="table table-striped">
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <td class="text-center">${task.tags}</td>
                             <td class="text-center">${task.title}</td>
                             <td class="text-center">${task.created_at}</td>
-                            <td class="text-center">${task.status}</td>
+                            <td id="${task.status}" class="text-center">${task.status}</td>
                             <td class="text-center">
                                 <button type="button"
                                     class="btn btn-outline-info btn-sm">Visualizar</button>
