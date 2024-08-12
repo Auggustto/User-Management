@@ -53,7 +53,13 @@ class Tasks(Base):
             "description": self.description,
             "user_id": self.user_id,
             "status": self.status,
-            "created_at": self.created_at,
-            "due_date": self.due_date,
+            "created_at": self.format_datetime(self.created_at),
+            "due_date": self.format_datetime(self.due_date),
             "updated_at": self.updated_at
         }
+    
+    @staticmethod
+    def format_datetime(value):
+        if value:
+            return value.strftime("%d/%m/%Y %H:%M:%S")  # Formato desejado
+        return None
