@@ -10,13 +10,13 @@ def create(id: int, metadata: MetadaTasks):
     return TaskController().create_task(id, metadata)
 
 @tasks_routers.get('/task/{id}', status_code=status.HTTP_200_OK, tags=['Tasks'])
-def read(id: int):
+def read(id: int, current_user: str = Depends(validation_token)):
     return TaskController().read_task(id)
 
 @tasks_routers.put('/task/{id}', status_code=status.HTTP_200_OK, tags=['Tasks'])
-def update(id: int, metadata: MetadaTasks):
+def update(id: int, metadata: MetadaTasks, current_user: str = Depends(validation_token)):
     return TaskController().update_task(id, metadata)
 
 @tasks_routers.delete('/task/{id}', status_code=status.HTTP_200_OK, tags=['Tasks'])
-def delete(id: int):
+def delete(id: int, current_user: str = Depends(validation_token)):
     return TaskController().delete_task(id)

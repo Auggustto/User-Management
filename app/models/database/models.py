@@ -48,6 +48,7 @@ class Tasks(Base):
     
     def as_dict(self):
         return {
+            "id": self.id,
             "tags": self.tags,
             "title": self.title,
             "description": self.description,
