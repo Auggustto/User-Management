@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (data.tasks && data.tasks.length > 0) {
                     let tableHTML = `
-                    <table class="table table-striped">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">id</th>
@@ -42,6 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Adiciona uma linha para cada tarefa
                     data.tasks.forEach((task, index) => {
+                        console.log("tasks", task);
+
                         tableHTML += `
                         <tr>
                             <td class="text-center">${index + 1}</td>
@@ -50,10 +52,24 @@ document.addEventListener("DOMContentLoaded", function () {
                             <td class="text-center">${task.created_at}</td>
                             <td id="${task.status}" class="text-center">${task.status}</td>
                             <td class="text-center">
-                                <button type="button"
-                                    class="btn btn-outline-info btn-sm">Visualizar</button>
-                                <button type="button"
-                                    class="btn btn-outline-danger btn-sm">Excluir</button>
+                                <div class="d-flex justify-content-end align-self-center">
+
+                                    <button type="button" class="btn btn-outline-danger mr-2" onclick="setTaskId(${task.id})"
+                                        data-toggle="modal" data-target="#ExemploModalCentralizado">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+
+                                    <form action="/edit" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-outline-primary mr-2"><i
+                                                class="bi bi-pencil"></i></button>
+                                    </form>
+
+                                    <form action="/view" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-outline-success mr-2"><i
+                                                class="bi bi-check"></i></button>
+                                    </form>
+
+                                </div>
                             </td>
                         </tr>
                     `;
@@ -67,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     tasksElement.innerHTML = tableHTML;
                 } else {
                     tasksElement.innerHTML = `
-                    <div class="alert alert-warning" role="alert">
+                    <div class="alert alert-warning mt-4" role="alert">
                         Poxa.. Nenhuma tarefa cadastrada <a href="#" class="alert-link">clique aqui para cadastrar</a>.
                     </div>
                 `;
