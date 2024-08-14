@@ -20,5 +20,5 @@ class MetadaTasks(BaseModel):
     @field_validator("status")
     def validate_status(cls, value):
         if value not in ["Pending", "In-Progress", "Completed"]:
-            raise ValueError("Status must be one of: Pending, In Progress, Completed.")
+            raise ValueError("Status must be one of: pending, InProgress, completed.")
         return value
