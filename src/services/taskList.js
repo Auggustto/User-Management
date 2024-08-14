@@ -84,13 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     tasksElement.innerHTML = `
                     <div class="alert alert-warning mt-4" role="alert">
-                        Poxa.. Nenhuma tarefa cadastrada <a href="#" class="alert-link">clique aqui para cadastrar</a>.
+                        Poxa... você ainda não tem nenhuma tarefa cadastrada. <a href="/src/pages/registerTask.html" class="alert-link">Clique aqui para cadastrar.</a>.
                     </div>
                 `;
                 }
                 //  verificar token 
                 if (data.detail === "Token has expired") {
-                    window.location.href = 'login.html';
+                    window.location.href = '../../index.html ';
                 }
 
             })

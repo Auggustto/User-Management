@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+    <!-- Internal -->
+    <link rel="stylesheet" href="/src/assets/styles/sidebar.css">
+    <link rel="stylesheet" href="/src/assets/styles/registerTask.css">
+
+    <title>Cadastrar tarefas</title>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- sidebar -->
+            <nav id="sidebar" class="col-md-2 d-none d-md-block sidebar shadow"></nav>
+
+            <main class="col-md-10 ml-sm-auto px-4">
+                <div class="content-wrapper">
+                    <div class="my-3 p-3 bg-white rounded shadow" style="width: 100%; max-width: 900px;">
+
+                        <!-- title -->
+                        <h6 class="border-gray pb-2 mb-0 text-center">Cadastrar tarefas</h6>
+
+                        <!-- form new task-->
+                        <div class="container">
+
+                            <form class="form-signin" id="registerTask">
+                                <div class="form-group">
+                                    <label for="inputTitle">Título</label>
+                                    <input type="text" class="form-control" id="inputTitle" placeholder="Título da tarefa" required>
+                                </div>
+
+                                <div class="mb-3 mb-4">
+                                    <label for="validationDescription">Descrição</label>
+                                    <textarea class="form-control" id="validationDescription" placeholder="Descreva a tarefa aqui.." rows="7"></textarea>
+                                </div>
+
+                                <div class="form-row justify-content-center">
+                                    <!-- date -->
+                                    <div class="form-group col-md-4">
+                                        <label for="date">Data de expiração</label>
+                                        <input class="form-control" type="text" id="calendar" placeholder="Selecione uma data">
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label for="inputCategory">Categorias</label>
+                                        <select id="inputCategory" class="form-control">
+                                            <option selected>Escolher...</option>
+                                            <option>pending</option>
+                                            <option>Trabalho</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="row justify-content-center mt-2">
+                                    <div class="col-sm-0 text-center">
+                                        <a href="/src/pages/home.html" class="btn btn-outline-primary">Voltar</a>
+                                        <button type="submit" class="btn btn-outline-success">Salvar</button>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                            
+                            <div id="alert">
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- Custom Scripts -->
+    <script src="/src/components/header.js"></script>
+    <script src="/src/services/registerTask.js"></script>
+    <script src="/src/services/calendarSetup.js"></script>
+
+    <!-- flatpickr v4 -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setupCalendar();
+        });
+    </script>
+</body>
+</html>
