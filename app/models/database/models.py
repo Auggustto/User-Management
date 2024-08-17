@@ -39,12 +39,15 @@ class Tasks(Base):
     title = Column(String(50), unique=False)
     description = Column(String, unique=False)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    category_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
     status = Column(String, unique=False)
     created_at = Column(DateTime, nullable=False)
     due_date = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=True)
     
     user = relationship("User", back_populates="tasks")
+    category = relationship("Category", back_populates="tasks")
+    
     
     def as_dict(self):
         return {
@@ -53,6 +56,7 @@ class Tasks(Base):
             "title": self.title,
             "description": self.description,
             "user_id": self.user_id,
+            "categorie_id": self.category_id,
             "status": self.status,
             "created_at": self.format_datetime(self.created_at),
             "due_date": self.format_datetime(self.due_date),
@@ -62,5 +66,21 @@ class Tasks(Base):
     @staticmethod
     def format_datetime(value):
         if value:
-            return value.strftime("%d/%m/%Y %H:%M:%S")  # Formato desejado
+            return value.strftime("%d/%m/%Y %H:%M:%S")
         return None
+
+
+class Category(Base):
+    
+    __tablename__ = 'categories'
+    
+    id = Column(Integer, primary_key=True)
+    category = Column(String(10), unique=True)
+    
+    tasks = relationship("Tasks", back_populates="category")
+    
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "tags": self.category,
+        }
