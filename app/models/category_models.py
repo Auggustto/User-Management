@@ -59,3 +59,16 @@ class CategoryModels(Category):
             db.add(check)
             db.commit()
             return {"message": "Category updated successfully"}
+    
+        
+    def delete_category(self, id: int):
+        with get_db_session() as db:
+            
+            check = self.get_category_id(id)
+            
+            if check is None:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Category with id: {id} not found.")
+            
+            db.delete(check)
+            db.commit()
+            return {"message": "Category deleted successfully"}

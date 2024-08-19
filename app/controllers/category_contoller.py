@@ -10,3 +10,6 @@ class CategoryController(CategoryModels):
     
     def update_category(self, id: int, metadata: dict):
         return super().update_category(id, metadata)
+    
+    def update_category(self, id: int):
+        return super().update_category(id)
