@@ -39,3 +39,23 @@ class CategoryModels(Category):
         if check is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Category with id: {id} not found.")
         return check.as_dict()
+    
+    
+    def update_category(self, id: int, metadata: dict):
+        
+        with get_db_session() as db:
+        
+            check = self.get_category_id(id)
+            
+            if check is None:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Category with id: {id} not found.")
+            
+            if self.get_category(str(metadata.category).upper()) is not None:
+                raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=f"Category: {metadata.category} already registered")     
+            
+            cat = str(metadata.category).upper()
+            print(cat)
+            check.category = cat
+            db.add(check)
+            db.commit()
+            return {"message": "Category updated successfully"}

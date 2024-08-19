@@ -10,5 +10,9 @@ def create(metadata: MetadaCategory, current_user: str = Depends(validation_toke
     return CategoryController().create_category(metadata)
 
 @category_routers.get('/category/{id}', status_code=status.HTTP_200_OK, tags=['Category'])
-def read(id, current_user: str = Depends(validation_token)):
+def read(id: int, current_user: str = Depends(validation_token)):
     return CategoryController().read_category(id)
+
+@category_routers.put('/category/{id}', status_code=status.HTTP_200_OK, tags=['Category'])
+def read(id: int, metadata: MetadaCategory, current_user: str = Depends(validation_token)):
+    return CategoryController().update_category(id, metadata)

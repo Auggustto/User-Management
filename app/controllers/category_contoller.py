@@ -6,4 +6,7 @@ class CategoryController(CategoryModels):
         return super().create_category(metadata)
     
     def read_category(self, id: int):
-        return super().create_category(id)
+        return super().read_category(id)
+    
+    def update_category(self, id: int, metadata: dict):
+        return super().update_category(id, metadata)
