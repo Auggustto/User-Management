@@ -6,6 +6,7 @@ from app.routers.start import routers
 from app.routers.user_router import user_routers
 from app.routers.login_router import user_login_routers
 from app.routers.tasks_router import tasks_routers
+from app.routers.category_router import category_routers
 
 
 app = FastAPI()
@@ -31,3 +32,4 @@ app.include_router(router=routers)
 app.include_router(router=user_routers)
 app.include_router(router=user_login_routers)
 app.include_router(router=tasks_routers)
+app.include_router(router=category_routers)
