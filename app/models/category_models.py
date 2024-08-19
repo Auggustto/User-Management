@@ -30,3 +30,12 @@ class CategoryModels(Category):
             db.add(task)
             db.commit()
             return {"message": "Category added successfully"}
+    
+    
+    def read_category(self, id: int):
+        
+        check = self.get_category_id(id)
+        
+        if check is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Category with id: {id} not found.")
+        return check.as_dict()
