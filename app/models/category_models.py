@@ -72,3 +72,8 @@ class CategoryModels(Category):
             db.delete(check)
             db.commit()
             return {"message": "Category deleted successfully"}
+
+
+    def read_all(self):
+        with get_db_session() as db:
+            return db.query(Category).all()

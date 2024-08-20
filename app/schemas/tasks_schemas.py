@@ -7,6 +7,8 @@ class MetadaTasks(BaseModel):
     title: str
     description: str
     status: str
+    category_id: int
+    date: str
     
     @field_validator("tags")
     def validate_tags(cls, value):

@@ -20,3 +20,7 @@ def read(id: int, metadata: MetadaCategory, current_user: str = Depends(validati
 @category_routers.delete('/category/{id}', status_code=status.HTTP_200_OK, tags=['Category'])
 def read(id: int, current_user: str = Depends(validation_token)):
     return CategoryController().delete_category(id)
+
+@category_routers.get('/category/all/', status_code=status.HTTP_200_OK, tags=['Category'])
+def read(current_user: str = Depends(validation_token)):
+    return CategoryController().read_all()

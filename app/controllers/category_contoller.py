@@ -13,3 +13,6 @@ class CategoryController(CategoryModels):
     
     def update_category(self, id: int):
         return super().update_category(id)
+    
+    def read_all(self):
+        return super().read_all()

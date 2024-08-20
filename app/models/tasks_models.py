@@ -4,6 +4,7 @@ from app.models.database.session_db import get_db_session
 from app.models.database.models import Tasks
 from app.models.user_models import UserModels
 from app.services.get_current_date_and_time_br_services import get_current_time
+from app.models.category_models import CategoryModels
 
 
 
@@ -24,14 +25,20 @@ class TasksModels(UserModels):
             
             if check is None:
                 raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Id: {id} not found.")
+            
+            if CategoryModels().get_category_id(int(metadata.category_id)) is None:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Category with id: {id} not found.")
+            
+            
             task = Tasks(
                 tags=metadata.tags,
                 title=metadata.title,
                 description=metadata.description,
                 user_id=check.id,
+                category_id=metadata.category_id,
                 status=metadata.status,
                 created_at=get_current_time(),
-                due_date=get_current_time()
+                due_date=metadata.date
                 )
             db.add(task)
             db.commit()
