@@ -101,3 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('Token ou email não encontrados no cache');
     }
 });
+
+
+

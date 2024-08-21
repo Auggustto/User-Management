@@ -7,10 +7,12 @@ document.getElementById('registerTask').addEventListener('submit', function (eve
     const id = localStorage.getItem('id');
 
     const title = document.getElementById('inputTitle').value;
+    const category_id = document.getElementById("inputCategory").value;
     const description = document.getElementById('validationDescription').value;
     const date = document.getElementById('calendar').value;
-    const tags = document.getElementById('inputCategory').value;
     const status = "Pending";
+    
+    const tags = "remover";
 
     console.log(title, description, date, tags, status)
 
@@ -20,7 +22,7 @@ document.getElementById('registerTask').addEventListener('submit', function (eve
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({title, description, date, tags, status})
+        body: JSON.stringify({title, description, date, tags, status, category_id})
     })
     .then(response => {
         console.log(response)
@@ -55,3 +57,57 @@ document.getElementById('registerTask').addEventListener('submit', function (eve
         )
     }
 )
+
+// List of category
+document.addEventListener("DOMContentLoaded", function () {
+
+    const category = document.getElementById('inputCategory');
+    const token = localStorage.getItem('jwt');
+    const id = localStorage.getItem('id');
+
+    // server
+    // http://srv579221.hstgr.cloud:8000/task-schedule/api/user/
+
+    if (token && id) {
+        fetch('http://localhost:8000/task-schedule/api/category/all/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data) {
+
+                    let categoryHTML = `
+                    <select id="inputCategory" class="form-control">
+                        <option selected>Escolher...</option>
+                    `;
+                    
+                    data.forEach((cat, index) => {
+                        
+                        console.log("cat", cat.category)
+                        
+                        categoryHTML += `
+                            <option value=${cat.id} >${cat.category}</option>
+                        `;
+                    });
+                    categoryHTML += `</select>`;
+                    category.innerHTML = categoryHTML;
+                }
+
+            //  Token expired
+            if (data.detail === "Token has expired") {
+                window.location.href = 'login.html';
+            }
+
+            })
+            .catch(error => {
+                console.error('Erro ao buscar tarefas:', error);
+            });
+    } else {
+        console.error('Token ou email não encontrados no cache');
+    }
+});
