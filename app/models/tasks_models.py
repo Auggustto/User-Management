@@ -1,4 +1,5 @@
 from fastapi import status, HTTPException
+# from sqlalchemy import desc
 
 from app.models.database.session_db import get_db_session
 from app.models.database.models import Tasks
@@ -16,6 +17,7 @@ class TasksModels(UserModels):
     def check_task(self, id: int):
         with get_db_session() as db:
             return db.query(Tasks).filter(Tasks.id == id).first()
+            # return db.query(Tasks).filter(Tasks.id == id).order_by(desc(Tasks.created_at)).all()
     
     
     def create_task(self, id: int, metadata: dict):

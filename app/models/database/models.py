@@ -4,6 +4,7 @@ from datetime import datetime
 from app.models.database.base import Base
 from app.services.get_current_date_and_time_br_services import format_datetime
 from collections import Counter
+from sqlalchemy import desc
 
 
 class User(Base):
@@ -15,7 +16,7 @@ class User(Base):
     password = Column(String, nullable=False)
     account_status = Column(Boolean, nullable=False)
     
-    tasks = relationship("Tasks", back_populates="user")
+    tasks = relationship("Tasks", back_populates="user", order_by=desc("tasks.created_at"))
     
     def as_dict(self):
 
